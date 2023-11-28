@@ -36,8 +36,10 @@ connect_to_snowflake <- function(warehouse, database, schema) {
     print("Connected to Snowflake successfully.")
   }
   
-  return(success)
+  return(myconn)
 }
+
+myconn<- connect_to_snowflake("ANALYTICS","ANALYTICS_DATA","HPLC_DATA")
 
 dbGetQuery(myconn, "USE WAREHOUSE ANALYTICS;")
 dbGetQuery(myconn, "USE DATABASE ANALYTICS_DATA;")
