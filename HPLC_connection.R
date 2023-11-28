@@ -39,7 +39,10 @@ connect_to_snowflake <- function(warehouse, database, schema) {
   return(success)
 }
 
+dbGetQuery(myconn, "USE WAREHOUSE ANALYTICS;")
+dbGetQuery(myconn, "USE DATABASE ANALYTICS_DATA;")
+dbGetQuery(myconn, "USE SCHEMA HPLC_DATA;")
 
-connect_to_snowflake("ANALYTICS","ANALYTICS_DATA","HPLC_DATA")
+hplc<- dbGetQuery(myconn,"SELECT DISTINCT SAMPLE_NAME FROM LACTOFERRIN;")
 
-solaris<- dbGetQuery(myconn,"SELECT * FROM SOLARIS WHERE RUNID IN ('I4 - W50', 'I3 - W51');")
+sample_data<- dbGetQuery(myconn,"SELECT * FROM LACTOFERRIN WHERE SAMPLE_NAME IN ('046-P2-E7-HTS-USP-231108CC-Ops-Prod-2-E7');")
